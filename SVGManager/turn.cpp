@@ -1,6 +1,8 @@
 #include "turn.h"
+#include "game_constants.h"
 
 Turn::Turn() :
+	id(INVALID_ID),
 	simulatedTurns()
 {
 
@@ -38,12 +40,12 @@ int Turn::getSimulatedTurnsCount() const {
 //*************************************************************************************************************
 
 void Turn::initSimulatedTurns(int simulatedTurnsCount) {
-	simulatedTurns.reserve(simulatedTurnsCount);
+	simulatedTurns.resize(simulatedTurnsCount);
 }
 
 //*************************************************************************************************************
 //*************************************************************************************************************
 
 SimulatedTurn* Turn::getSimulatedTurnPtr(int simulatedTurnIdx) {
-	return &(*(simulatedTurns.begin() + simulatedTurnIdx));
+	return simulatedTurns.data() + simulatedTurnIdx;
 }

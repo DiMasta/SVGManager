@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClInclude Include="creator.h" />
     <ClInclude Include="creator_constants.h" />
+    <ClInclude Include="game_constants.h" />
     <ClInclude Include="simulated_turn.h" />
     <ClInclude Include="turn.h" />
     <ClInclude Include="game_data.h" />

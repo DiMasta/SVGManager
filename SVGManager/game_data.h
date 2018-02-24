@@ -12,14 +12,22 @@ public:
 	GameData();
 	~GameData();
 
+	int getWorldWidth() const;
+	int getWorldHeight() const;
+	std::string getBackgroundColor() const;
+
+	void setWorldWidth(int worldWidth);
+	void setWorldHeight(int worldHeight);
+	void setBackGroundColor(const std::string& backgroundColor);
+
 	void initTurns(int gameTurnsCount);
 
 	Turn* getTurnPtr(int gameTurnIdx);
 
 private:
-	// Game objects
-	// All turns array
-
+	int worldWidth;
+	int worldHeight;
+	std::string backgroundColor;
 	Turns turns;
 };
 

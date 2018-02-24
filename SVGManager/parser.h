@@ -15,13 +15,16 @@ public:
 	void processGameTurns(const std::string& value) const;
 
 	void handleLine(const std::string& line);
-	void parseGameFiles();
-	void parseMainGameFile();
+	void parseGameFile(const std::string& fileName);
+	void parseSimulatedTurnFiles();
 	void processTag(const std::string& tag, const std::string& value);
 	void processTagLine(const std::string& line);
 	void processGameTurn(const std::string& value);
 	void processSimulatedTurns(const std::string& value);
-	void parseSimulatedTurnFiles();
+
+	void processWorldWidth(const std::string& value) const;
+	void processWorldHeight(const std::string& value) const;
+	void processWorldBGColor(const std::string& value) const;
 
 	LineType getLineType(const std::string& line) const;
 

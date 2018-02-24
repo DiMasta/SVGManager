@@ -35,22 +35,15 @@ void Parser::setGameData(GameData* gameData) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-void Parser::parseGameFiles() {
-	parseMainGameFile();
-}
-
-//*************************************************************************************************************
-//*************************************************************************************************************
-
-void Parser::parseMainGameFile() {
-	ifstream mainGameFile(MAIN_GAME_FILE);
-	if (mainGameFile.is_open()) {
+void Parser::parseGameFile(const string& fileName) {
+	ifstream gameFile(fileName);
+	if (gameFile.is_open()) {
 		string line;
-		while (getline(mainGameFile, line)) {
+		while (getline(gameFile, line)) {
 			handleLine(line);
 		}
 
-		mainGameFile.close();
+		gameFile.close();
 	}
 }
 
@@ -100,6 +93,15 @@ void Parser::processTag(const string& tag, const string& value) {
 	else if (TAG_SIMULATED_TURNS == tag) {
 		processSimulatedTurns(value);
 	}
+	else if (TAG_WORLD_WIDTH == tag) {
+		processWorldWidth(value);
+	}
+	else if (TAG_WORLD_HEIGHT == tag) {
+		processWorldHeight(value);
+	}
+	else if (TAG_WORLD_BACKGROUND_COLOR == tag) {
+		processWorldBGColor(value);
+	}
 }
 
 //*************************************************************************************************************
@@ -133,12 +135,37 @@ void Parser::processSimulatedTurns(const string& value) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
+void Parser::processWorldWidth(const string& value) const {
+	const int worldWidth = stoi(value);
+	gameData->setWorldWidth(worldWidth);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processWorldHeight(const string& value) const {
+	const int worldHeight = stoi(value);
+	gameData->setWorldHeight(worldHeight);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processWorldBGColor(const string& value) const {
+	gameData->setBackGroundColor(value);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
 void Parser::parseSimulatedTurnFiles() {
 	const int simulatedTurnsCount = turn->getSimulatedTurnsCount();
 	const int turnId = turn->getId();
 
 	for (int simTurnIdx = 0; simTurnIdx < simulatedTurnsCount; ++simTurnIdx) {
 		const string simulatedTurnFile = generateSimTurnFileName(turnId, simTurnIdx);
+
+		parseGameFile(simulatedTurnFile);
 	}
 }
 
@@ -163,9 +190,11 @@ LineType Parser::getLineType(const string& line) const {
 
 string Parser::generateSimTurnFileName(int turnId, int simTurnIdx) const {
 	string fileName = SIMULATED_TURN_PREFIX;
+	fileName.append(UNDERSCORE);
 	fileName.append(to_string(turnId));
+	fileName.append(UNDERSCORE);
 	fileName.append(to_string(simTurnIdx));
-	fileName.append(SIMULATED_TURN_POSTFIX);
+	fileName.append(TXT_FILE_POSTFIX);
 
 	return fileName;
 }

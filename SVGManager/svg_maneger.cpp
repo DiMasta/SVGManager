@@ -52,7 +52,7 @@ void SVGManager::filePrintStr(string strToPrint) {
 
 void SVGManager::obtainGameSimulation() {
 	parser.setGameData(&gameData);
-	parser.parseGameFiles();
+	parser.parseGameFile(MAIN_GAME_FILE);
 
 	creator.createGameSimulation();
 }
