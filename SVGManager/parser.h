@@ -12,19 +12,22 @@ public:
 	GameData* getGameData() const;
 	void setGameData(GameData* gameData);
 
-	void processGameTurns(const std::string& value) const;
-
 	void handleLine(const std::string& line);
 	void parseGameFile(const std::string& fileName);
 	void parseSimulatedTurnFiles();
 	void processTag(const std::string& tag, const std::string& value);
 	void processTagLine(const std::string& line);
 	void processGameTurn(const std::string& value);
-	void processSimulatedTurns(const std::string& value);
+	void processSimulatedTurnsCount(const std::string& value);
+	void processObject(const std::string& value);
 
+	void processGameTurnsCount(const std::string& value) const;
 	void processWorldWidth(const std::string& value) const;
 	void processWorldHeight(const std::string& value) const;
 	void processWorldBGColor(const std::string& value) const;
+	void processObjectsCount(const std::string& value) const;
+	void processObjectType(const std::string& value) const;
+	void processObjectColor(const std::string& value) const;
 
 	LineType getLineType(const std::string& line) const;
 
@@ -32,8 +35,10 @@ public:
 
 private:
 	GameData* gameData;
+
 	Turn* turn;
 	SimulatedTurn* simulatedTurn;
+	Object* object;
 };
 
 #endif //__PARSER_H__

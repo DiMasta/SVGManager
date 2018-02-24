@@ -84,14 +84,14 @@ void Parser::processTagLine(const string& line) {
 //*************************************************************************************************************
 
 void Parser::processTag(const string& tag, const string& value) {
-	if (TAG_GAME_TURNS == tag) {
-		processGameTurns(value);
+	if (TAG_GAME_TURNS_COUNT == tag) {
+		processGameTurnsCount(value);
 	}
 	else if (TAG_GAME_TURN == tag) {
 		processGameTurn(value);
 	}
-	else if (TAG_SIMULATED_TURNS == tag) {
-		processSimulatedTurns(value);
+	else if (TAG_SIMULATED_TURNS_COUNT == tag) {
+		processSimulatedTurnsCount(value);
 	}
 	else if (TAG_WORLD_WIDTH == tag) {
 		processWorldWidth(value);
@@ -102,12 +102,24 @@ void Parser::processTag(const string& tag, const string& value) {
 	else if (TAG_WORLD_BACKGROUND_COLOR == tag) {
 		processWorldBGColor(value);
 	}
+	else if (TAG_OBJECTS_COUNT == tag) {
+		processObjectsCount(value);
+	}
+	else if (TAG_OBJECT == tag) {
+		processObject(value);
+	}
+	else if (TAG_OBJECT_TYPE == tag) {
+		processObjectType(value);
+	}
+	else if (TAG_OBJECT_COLOR == tag) {
+		processObjectColor(value);
+	}
 }
 
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-void Parser::processGameTurns(const string& value) const {
+void Parser::processGameTurnsCount(const string& value) const {
 	const int gameTurns = stoi(value);
 	gameData->initTurns(gameTurns);
 }
@@ -124,7 +136,7 @@ void Parser::processGameTurn(const string& value) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-void Parser::processSimulatedTurns(const string& value) {
+void Parser::processSimulatedTurnsCount(const string& value) {
 	const int simulatedTurnsCount = stoi(value);
 	turn->initSimulatedTurns(simulatedTurnsCount);
 	simulatedTurn = turn->getSimulatedTurnPtr(0);
@@ -136,7 +148,7 @@ void Parser::processSimulatedTurns(const string& value) {
 //*************************************************************************************************************
 
 void Parser::processWorldWidth(const string& value) const {
-	const int worldWidth = stoi(value);
+	const float worldWidth = stof(value);
 	gameData->setWorldWidth(worldWidth);
 }
 
@@ -144,7 +156,7 @@ void Parser::processWorldWidth(const string& value) const {
 //*************************************************************************************************************
 
 void Parser::processWorldHeight(const string& value) const {
-	const int worldHeight = stoi(value);
+	const float worldHeight = stof(value);
 	gameData->setWorldHeight(worldHeight);
 }
 
@@ -153,6 +165,34 @@ void Parser::processWorldHeight(const string& value) const {
 
 void Parser::processWorldBGColor(const string& value) const {
 	gameData->setBackGroundColor(value);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectsCount(const string& value) const {
+	const int objectsCount = stoi(value);
+	gameData->initObjects(objectsCount);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObject(const string& value) {
+	const int objectIdx = stoi(value);
+	object = gameData->getObjectPtr(objectIdx);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectType(const string& value) const {
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectColor(const string& value) const {
 }
 
 //*************************************************************************************************************

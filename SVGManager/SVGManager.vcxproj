@@ -110,8 +110,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="circle.cpp" />
     <ClCompile Include="creator.cpp" />
     <ClCompile Include="game_data.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="point.cpp" />
     <ClCompile Include="simulated_turn.cpp" />
     <ClCompile Include="turn.cpp" />
     <ClCompile Include="main.cpp" />
@@ -119,9 +122,12 @@
     <ClCompile Include="svg_maneger.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="circle.h" />
     <ClInclude Include="creator.h" />
     <ClInclude Include="creator_constants.h" />
     <ClInclude Include="game_constants.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="point.h" />
     <ClInclude Include="simulated_turn.h" />
     <ClInclude Include="turn.h" />
     <ClInclude Include="game_data.h" />
