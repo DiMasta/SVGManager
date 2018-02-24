@@ -26,7 +26,7 @@ public:
 	void initObjects(int objectsCount);
 
 	Turn* getTurnPtr(int gameTurnIdx);
-	Object* getObjectPtr(int objectIdx);
+	Object** getObjectPtr(int objectIdx);
 
 private:
 	float worldWidth;

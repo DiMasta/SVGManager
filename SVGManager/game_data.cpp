@@ -13,6 +13,12 @@ GameData::GameData() :
 
 GameData::~GameData() {
 	turns.clear();
+
+	for (size_t objIdx = 0; objIdx < objects.size(); ++objIdx) {
+		delete objects[objIdx];
+	}
+
+	objects.clear();
 }
 
 //*************************************************************************************************************
@@ -68,7 +74,7 @@ void GameData::initTurns(int gameTurnsCount) {
 //*************************************************************************************************************
 
 void GameData::initObjects(int objectsCount) {
-	objects.resize(objectsCount);
+	objects.resize(objectsCount, nullptr);
 }
 
 //*************************************************************************************************************
@@ -81,6 +87,6 @@ Turn* GameData::getTurnPtr(int gameTurnIdx) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-Object* GameData::getObjectPtr(int objectIdx) {
-	return objects[objectIdx];
+Object** GameData::getObjectPtr(int objectIdx) {
+	return objects.data() + objectIdx;
 }

@@ -1,6 +1,8 @@
 #include <fstream>
 
 #include "parser.h"
+#include "point.h"
+#include "circle.h"
 
 using namespace std;
 
@@ -186,13 +188,22 @@ void Parser::processObject(const string& value) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-void Parser::processObjectType(const string& value) const {
+void Parser::processObjectType(const string& value) {
+	if (POINT == value) {
+		*object = new Point();
+		(*object)->setType(ObjectType::POINT);
+	}
+	else if (CIRCLE == value) {
+		*object = new Circle();
+		(*object)->setType(ObjectType::CIRCLE);
+	}
 }
 
 //*************************************************************************************************************
 //*************************************************************************************************************
 
 void Parser::processObjectColor(const string& value) const {
+	(*object)->setColor(value);
 }
 
 //*************************************************************************************************************

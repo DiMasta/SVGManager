@@ -10,6 +10,10 @@ static const std::string TAG_VALUE_DELIMITER = ": ";
 static const std::string UNDERSCORE = "_";
 static const std::string EMPTY_LINE = "";
 
+// Object types
+static const std::string POINT = "POINT";
+static const std::string CIRCLE = "CIRCLE";
+
 // Turn tags
 static const std::string TAG_GAME_TURNS_COUNT = "GAME_TURNS_COUNT";
 static const std::string TAG_GAME_TURN = "GAME_TURN";
@@ -25,6 +29,11 @@ static const std::string TAG_OBJECTS_COUNT = "OBJECTS_COUNT";
 static const std::string TAG_OBJECT = "OBJECT";
 static const std::string TAG_OBJECT_TYPE = "OBJECT_TYPE";
 static const std::string TAG_OBJECT_COLOR = "OBJRCT_COLOR";
+
+// Circle tags
+static const std::string TAG_CIRCLE_CENTER_X = "CIRCLE_CENTER_X";
+static const std::string TAG_CIRCLE_CENTER_Y = "CIRCLE_CENTER_Y";
+static const std::string TAG_CIRCLE_RADIUS = "CIRCLE_RADIUS";
 
 enum class LineType : int {
 	INVALID_LINE = -1,

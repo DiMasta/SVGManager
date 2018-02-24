@@ -20,13 +20,13 @@ public:
 	void processGameTurn(const std::string& value);
 	void processSimulatedTurnsCount(const std::string& value);
 	void processObject(const std::string& value);
+	void processObjectType(const std::string& value);
 
 	void processGameTurnsCount(const std::string& value) const;
 	void processWorldWidth(const std::string& value) const;
 	void processWorldHeight(const std::string& value) const;
 	void processWorldBGColor(const std::string& value) const;
 	void processObjectsCount(const std::string& value) const;
-	void processObjectType(const std::string& value) const;
 	void processObjectColor(const std::string& value) const;
 
 	LineType getLineType(const std::string& line) const;
@@ -38,7 +38,7 @@ private:
 
 	Turn* turn;
 	SimulatedTurn* simulatedTurn;
-	Object* object;
+	Object** object;
 };
 
 #endif //__PARSER_H__
