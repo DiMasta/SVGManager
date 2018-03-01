@@ -28,11 +28,11 @@ static const std::string TAG_WORLD_BACKGROUND_COLOR = "WORLD_BACKGROUND_COLOR";
 static const std::string TAG_OBJECTS_COUNT = "OBJECTS_COUNT";
 static const std::string TAG_OBJECT = "OBJECT";
 static const std::string TAG_OBJECT_TYPE = "OBJECT_TYPE";
-static const std::string TAG_OBJECT_COLOR = "OBJRCT_COLOR";
+static const std::string TAG_OBJECT_COLOR = "OBJECT_COLOR";
+static const std::string TAG_OBJECT_CENTER_X = "OBJECT_CENTER_X";
+static const std::string TAG_OBJECT_CENTER_Y = "OBJECT_CENTER_Y";
 
 // Circle tags
-static const std::string TAG_CIRCLE_CENTER_X = "CIRCLE_CENTER_X";
-static const std::string TAG_CIRCLE_CENTER_Y = "CIRCLE_CENTER_Y";
 static const std::string TAG_CIRCLE_RADIUS = "CIRCLE_RADIUS";
 
 enum class LineType : int {

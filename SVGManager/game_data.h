@@ -28,6 +28,10 @@ public:
 	Turn* getTurnPtr(int gameTurnIdx);
 	Object** getObjectPtr(int objectIdx);
 
+	const Object* const getObject(int objectIdx);
+
+	int getObjectsCount() const;
+
 private:
 	float worldWidth;
 	float worldHeight;

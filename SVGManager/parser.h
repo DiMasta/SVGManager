@@ -28,6 +28,9 @@ public:
 	void processWorldBGColor(const std::string& value) const;
 	void processObjectsCount(const std::string& value) const;
 	void processObjectColor(const std::string& value) const;
+	void processObjectCenterX(const std::string& value) const;
+	void processObjectCenterY(const std::string& value) const;
+	void processCircleRadius(const std::string& value) const;
 
 	LineType getLineType(const std::string& line) const;
 

@@ -1,6 +1,0 @@
-#ifndef __CREATOR_CONSTANTS_H__
-#define __CREATOR_CONSTANTS_H__
-
-
-
-#endif // __CREATOR_CONSTANTS_H__

@@ -54,6 +54,7 @@ void SVGManager::obtainGameSimulation() {
 	parser.setGameData(&gameData);
 	parser.parseGameFile(MAIN_GAME_FILE);
 
+	creator.setGameData(&gameData);
 	creator.createGameSimulation();
 }
 

@@ -90,3 +90,17 @@ Turn* GameData::getTurnPtr(int gameTurnIdx) {
 Object** GameData::getObjectPtr(int objectIdx) {
 	return objects.data() + objectIdx;
 }
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+const Object* const GameData::getObject(int objectIdx) {
+	return objects[objectIdx];
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+int GameData::getObjectsCount() const {
+	return static_cast<int>(objects.size());
+}

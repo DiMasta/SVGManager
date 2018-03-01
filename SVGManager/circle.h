@@ -8,8 +8,12 @@ public:
 	Circle();
 	~Circle();
 
-private:
+	float getRadius() const;
 
+	void setRadius(float radius);
+
+private:
+	float radius;
 };
 
 #endif // !__CIRCLE_H__

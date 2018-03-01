@@ -21,9 +21,6 @@
     <ClCompile Include="svg_maneger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="creator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +42,9 @@
     <ClCompile Include="circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="svg_creator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="svg_manager.h">
@@ -56,16 +56,10 @@
     <ClInclude Include="parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="creator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parser_constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="creator_constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="simulated_turn.h">
@@ -84,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svg_creator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svg_creator_constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

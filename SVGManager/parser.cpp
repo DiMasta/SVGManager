@@ -116,6 +116,15 @@ void Parser::processTag(const string& tag, const string& value) {
 	else if (TAG_OBJECT_COLOR == tag) {
 		processObjectColor(value);
 	}
+	else if (TAG_OBJECT_CENTER_X == tag) {
+		processObjectCenterX(value);
+	}
+	else if (TAG_OBJECT_CENTER_Y == tag) {
+		processObjectCenterY(value);
+	}
+	else if (TAG_CIRCLE_RADIUS == tag) {
+		processCircleRadius(value);
+	}
 }
 
 //*************************************************************************************************************
@@ -204,6 +213,32 @@ void Parser::processObjectType(const string& value) {
 
 void Parser::processObjectColor(const string& value) const {
 	(*object)->setColor(value);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectCenterX(const string& value) const {
+	const float xCoord = stof(value);
+	(*object)->setXCoord(xCoord);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectCenterY(const string& value) const {
+	const float yCoord = stof(value);
+	(*object)->setYCoord(yCoord);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processCircleRadius(const string& value) const {
+	const float radius = stof(value);
+	
+	Circle* circle = dynamic_cast<Circle*>(*object);
+	circle->setRadius(radius);
 }
 
 //*************************************************************************************************************

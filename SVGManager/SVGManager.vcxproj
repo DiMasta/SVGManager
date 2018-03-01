@@ -111,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="circle.cpp" />
-    <ClCompile Include="creator.cpp" />
+    <ClCompile Include="svg_creator.cpp" />
     <ClCompile Include="game_data.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="point.cpp" />
@@ -123,8 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
-    <ClInclude Include="creator.h" />
-    <ClInclude Include="creator_constants.h" />
+    <ClInclude Include="svg_creator.h" />
+    <ClInclude Include="svg_creator_constants.h" />
     <ClInclude Include="game_constants.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="point.h" />
