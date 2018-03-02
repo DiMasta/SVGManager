@@ -7,7 +7,7 @@
 
 #include "svg_constants.h"
 #include "parser.h"
-#include "creator.h"
+#include "svg_creator.h"
 #include "game_data.h"
 
 class SVGManager {
@@ -15,10 +15,6 @@ public:
 	SVGManager();
 	~SVGManager();
 
-	void fileInit();
-	void fileDone();
-	void fileClose();
-	void filePrintStr(std::string strToPrint);
 	void obtainGameSimulation();
 
 	std::string constructStrokeForRGB(int r, int g, int b) const;
@@ -27,11 +23,9 @@ public:
 	std::string constructMultiLineTitle(const std::vector<std::string>& titleLines) const;
 
 private:
-	std::ofstream svgHtmlFileStream;
-
 	GameData gameData;
 	Parser parser;
-	Creator creator;
+	SVGCreator creator;
 };
 
 #endif // __SVG_MANAGER_H__
