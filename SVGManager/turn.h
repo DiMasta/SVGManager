@@ -5,8 +5,6 @@
 
 #include "simulated_turn.h"
 
-typedef std::vector<SimulatedTurn> SimulatedTurns;
-
 class Turn {
 public:
 	Turn();
@@ -25,5 +23,7 @@ private:
 	int id;
 	SimulatedTurns simulatedTurns;
 };
+
+typedef std::vector<Turn> Turns;
 
 #endif // __GAME_TURN_H__

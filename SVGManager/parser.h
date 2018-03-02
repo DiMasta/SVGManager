@@ -31,6 +31,8 @@ public:
 	void processObjectCenterX(const std::string& value) const;
 	void processObjectCenterY(const std::string& value) const;
 	void processCircleRadius(const std::string& value) const;
+	void processObjectContour(const std::string& value) const;
+	void processObjectFill(const std::string& value) const;
 
 	LineType getLineType(const std::string& line) const;
 

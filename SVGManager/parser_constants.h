@@ -9,6 +9,8 @@ static const std::string TXT_FILE_POSTFIX = ".txt";
 static const std::string TAG_VALUE_DELIMITER = ": ";
 static const std::string UNDERSCORE = "_";
 static const std::string EMPTY_LINE = "";
+static const std::string TRUE = "TRUE";
+static const std::string FALSE = "FALSE";
 
 // Object types
 static const std::string POINT = "POINT";
@@ -31,6 +33,8 @@ static const std::string TAG_OBJECT_TYPE = "OBJECT_TYPE";
 static const std::string TAG_OBJECT_COLOR = "OBJECT_COLOR";
 static const std::string TAG_OBJECT_CENTER_X = "OBJECT_CENTER_X";
 static const std::string TAG_OBJECT_CENTER_Y = "OBJECT_CENTER_Y";
+static const std::string TAG_OBJECT_CONTOUR = "OBJECT_CONTOUR";
+static const std::string TAG_OBJECT_FILL = "OBJECT_FILL";
 
 // Circle tags
 static const std::string TAG_CIRCLE_RADIUS = "CIRCLE_RADIUS";

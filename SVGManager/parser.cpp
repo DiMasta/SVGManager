@@ -125,6 +125,12 @@ void Parser::processTag(const string& tag, const string& value) {
 	else if (TAG_CIRCLE_RADIUS == tag) {
 		processCircleRadius(value);
 	}
+	else if (TAG_OBJECT_CONTOUR == tag) {
+		processObjectContour(value);
+	}
+	else if (TAG_OBJECT_FILL == tag) {
+		processObjectFill(value);
+	}
 }
 
 //*************************************************************************************************************
@@ -239,6 +245,27 @@ void Parser::processCircleRadius(const string& value) const {
 	
 	Circle* circle = dynamic_cast<Circle*>(*object);
 	circle->setRadius(radius);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectContour(const string& value) const {
+	const float contour = stof(value);
+	(*object)->setContour(contour);
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::processObjectFill(const string& value) const {
+	int fill = true;
+
+	if (FALSE == value) {
+		fill = false;
+	}
+
+	(*object)->setFill(fill);
 }
 
 //*************************************************************************************************************

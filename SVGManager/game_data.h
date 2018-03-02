@@ -6,9 +6,6 @@
 #include "turn.h"
 #include "object.h"
 
-typedef std::vector<Turn> Turns;
-typedef std::vector<Object*> Objects;
-
 class GameData {
 public:
 	GameData();
@@ -21,6 +18,9 @@ public:
 	void setWorldWidth(float worldWidth);
 	void setWorldHeight(float worldHeight);
 	void setBackGroundColor(const std::string& backgroundColor);
+	
+	const Objects* const getObjectsPtr();
+	const Turns* const getTurnsPtr();
 
 	void initTurns(int gameTurnsCount);
 	void initObjects(int objectsCount);
