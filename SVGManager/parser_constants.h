@@ -40,9 +40,16 @@ static const std::string TAG_OBJECT_FILL = "OBJECT_FILL";
 static const std::string TAG_CIRCLE_RADIUS = "CIRCLE_RADIUS";
 
 enum class LineType : int {
-	INVALID_LINE = -1,
-	TAG_LINE = 0,
-	EMPTY_LINE,
+	INVALID = -1,
+	TAG = 0,
+	EMPTY,
+};
+
+enum class Scope : int {
+	INVALID = -1,
+	GAME = 0,
+	TURN,
+	SIMULATED_TURN,
 };
 
 #endif // __PARSER_CONSTANTS_H__

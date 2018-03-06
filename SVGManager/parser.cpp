@@ -7,10 +7,12 @@
 using namespace std;
 
 Parser::Parser() :
+	scope(Scope::INVALID),
 	gameData(nullptr),
 	turn(nullptr),
 	simulatedTurn(nullptr)
 {
+
 }
 
 //*************************************************************************************************************
@@ -18,6 +20,13 @@ Parser::Parser() :
 
 Parser::~Parser() {
 
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+Scope Parser::getScope() const {
+	return scope;
 }
 
 //*************************************************************************************************************
@@ -32,6 +41,13 @@ GameData* Parser::getGameData() const {
 
 void Parser::setGameData(GameData* gameData) {
 	this->gameData = gameData;
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+void Parser::setScope(Scope scope) {
+	this->scope = scope;
 }
 
 //*************************************************************************************************************
@@ -56,11 +72,11 @@ void Parser::handleLine(const string& line) {
 	LineType lineType = getLineType(line);
 
 	switch (lineType) {
-		case (LineType::TAG_LINE): {
+		case (LineType::TAG): {
 			processTagLine(line);
 			break;
 		}
-		case (LineType::EMPTY_LINE): {
+		case (LineType::EMPTY): {
 			break;
 		}
 		default: {
@@ -148,6 +164,7 @@ void Parser::processGameTurn(const string& value) {
 	const int gameTurnIdx = stoi(value);
 	turn = gameData->getTurnPtr(gameTurnIdx);
 	turn->setId(gameTurnIdx);
+	scope = Scope::TURN;
 }
 
 //*************************************************************************************************************
@@ -156,7 +173,6 @@ void Parser::processGameTurn(const string& value) {
 void Parser::processSimulatedTurnsCount(const string& value) {
 	const int simulatedTurnsCount = stoi(value);
 	turn->initSimulatedTurns(simulatedTurnsCount);
-	simulatedTurn = turn->getSimulatedTurnPtr(0);
 
 	parseSimulatedTurnFiles();
 }
@@ -189,7 +205,13 @@ void Parser::processWorldBGColor(const string& value) const {
 
 void Parser::processObjectsCount(const string& value) const {
 	const int objectsCount = stoi(value);
-	gameData->initObjects(objectsCount);
+
+	if (Scope::GAME == scope) {
+		gameData->initObjects(objectsCount);
+	}
+	else if (Scope::SIMULATED_TURN == scope) {
+		simulatedTurn->initObjects(objectsCount);
+	}
 }
 
 //*************************************************************************************************************
@@ -197,7 +219,13 @@ void Parser::processObjectsCount(const string& value) const {
 
 void Parser::processObject(const string& value) {
 	const int objectIdx = stoi(value);
-	object = gameData->getObjectPtr(objectIdx);
+
+	if (Scope::GAME == scope) {
+		object = gameData->getObjectPtr(objectIdx);
+	}
+	else if (Scope::SIMULATED_TURN == scope) {
+		object = simulatedTurn->getObjectPtr(objectIdx);
+	}
 }
 
 //*************************************************************************************************************
@@ -272,12 +300,15 @@ void Parser::processObjectFill(const string& value) const {
 //*************************************************************************************************************
 
 void Parser::parseSimulatedTurnFiles() {
+	scope = Scope::SIMULATED_TURN;
+
 	const int simulatedTurnsCount = turn->getSimulatedTurnsCount();
 	const int turnId = turn->getId();
 
 	for (int simTurnIdx = 0; simTurnIdx < simulatedTurnsCount; ++simTurnIdx) {
-		const string simulatedTurnFile = generateSimTurnFileName(turnId, simTurnIdx);
+		simulatedTurn = turn->getSimulatedTurnPtr(simTurnIdx);
 
+		const string simulatedTurnFile = generateSimTurnFileName(turnId, simTurnIdx);
 		parseGameFile(simulatedTurnFile);
 	}
 }
@@ -286,13 +317,13 @@ void Parser::parseSimulatedTurnFiles() {
 //*************************************************************************************************************
 
 LineType Parser::getLineType(const string& line) const {
-	LineType lineType = LineType::INVALID_LINE;
+	LineType lineType = LineType::INVALID;
 
 	if (line.find(TAG_VALUE_DELIMITER) != string::npos) {
-		lineType = LineType::TAG_LINE;
+		lineType = LineType::TAG;
 	}
 	else if (EMPTY_LINE == line) {
-		lineType = LineType::EMPTY_LINE;
+		lineType = LineType::EMPTY;
 	}
 
 	return lineType;

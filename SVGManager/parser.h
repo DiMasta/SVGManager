@@ -9,8 +9,11 @@ public:
 	Parser();
 	~Parser();
 
+	Scope getScope() const;
 	GameData* getGameData() const;
+
 	void setGameData(GameData* gameData);
+	void setScope(Scope scope);
 
 	void handleLine(const std::string& line);
 	void parseGameFile(const std::string& fileName);
@@ -39,6 +42,7 @@ public:
 	std::string generateSimTurnFileName(int turnId, int simTurnIdx) const;
 
 private:
+	Scope scope;
 	GameData* gameData;
 
 	Turn* turn;

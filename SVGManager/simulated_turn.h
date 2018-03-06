@@ -3,13 +3,14 @@
 
 #include <vector>
 
-class SimulatedTurn {
+#include "objects_holder.h"
+
+class SimulatedTurn : public ObjectsHolder {
 public:
 	SimulatedTurn();
 	~SimulatedTurn();
 
 private:
-	// Turn objects array
 };
 
 typedef std::vector<SimulatedTurn> SimulatedTurns;
