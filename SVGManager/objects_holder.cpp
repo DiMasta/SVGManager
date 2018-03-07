@@ -28,7 +28,7 @@ void ObjectsHolder::initObjects(int objectsCount) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-const Objects* const ObjectsHolder::getObjectsPtr() {
+const Objects* const ObjectsHolder::getObjectsPtr() const {
 	return &objects;
 }
 
@@ -42,7 +42,7 @@ Object** ObjectsHolder::getObjectPtr(int objectIdx) {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-const Object* const ObjectsHolder::getObject(int objectIdx) {
+const Object* const ObjectsHolder::getObject(int objectIdx) const {
 	return objects[objectIdx];
 }
 

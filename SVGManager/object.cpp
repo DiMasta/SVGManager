@@ -4,9 +4,12 @@ using namespace std;
 
 Object::Object() :
 	id(INVALID_ID),
+	fill(false),
 	type(ObjectType::INVALID_OBJECT),
+	color(""),
 	xCoord(0.f),
-	yCoord(0.f)
+	yCoord(0.f),
+	contour(0.f)
 {
 
 }

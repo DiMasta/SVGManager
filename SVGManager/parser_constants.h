@@ -7,7 +7,6 @@ static const std::string MAIN_GAME_FILE = "main_game_file.txt";
 static const std::string SIMULATED_TURN_PREFIX = "simulatedTurn";
 static const std::string TXT_FILE_POSTFIX = ".txt";
 static const std::string TAG_VALUE_DELIMITER = ": ";
-static const std::string UNDERSCORE = "_";
 static const std::string EMPTY_LINE = "";
 static const std::string TRUE = "TRUE";
 static const std::string FALSE = "FALSE";

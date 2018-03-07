@@ -11,6 +11,7 @@ static const std::string XML_HEADER_LINE = "<? xml version=\"1.0\" encoding=\"UT
 static const std::string SVG_OPENNER = "xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"";
 
 // SVG variables
+static const std::string ID = "id";
 static const std::string WIDTH = "width";
 static const std::string HEIGHT = "height";
 static const std::string STYLE = "style";
@@ -23,6 +24,7 @@ static const std::string BACKGROUND = "background";
 static const std::string STROKE = "stroke";
 static const std::string STROKE_WIDTH = "stroke-width";
 static const std::string FILL = "fill";
+static const std::string DISPLAY = "display";
 
 // SVG style values
 static const std::string NONE = "none";
@@ -36,6 +38,8 @@ static const char TAG_OPEN = '<';
 static const char TAG_BEGIN_CLOSE = '/';
 static const char TAG_CLOSE = '>';
 
+static const std::string TAG_GROUP = "g";
+
 // Common symbols
 static const char EQUAL = '=';
 static const char QUOTE = '\"';
@@ -44,7 +48,9 @@ static const char COLON = ':';
 static const char SEMICOLON = ';';
 static const char NEW_LINE = '\n';
 
-// Numericals
-static const float POINT_RADIUS = 5.f;
+static const std::string EMPTY_STRING = "";
+
+// Helper strings
+static std::string TURN = "turn";
 
 #endif // __CREATOR_CONSTANTS_H__

@@ -43,9 +43,9 @@ void SVGCreator::createGameSimulation() {
 
 	printSVGStr(constructSVGGraphicalObjects(gameData->getObjectsPtr()));
 
-	// print turns data
+	printSVGStr(constructSVGTurns());
 
-	printSVGStr(constructCloseTag(SVG));
+	printSVGStr(constructTag(SVG, EMPTY_STRING, true));
 	done();
 }
 
@@ -76,7 +76,7 @@ void SVGCreator::printSVGStr(const string& svgStr) {
 //*************************************************************************************************************
 
 string SVGCreator::constructSVGOpenTag() const {
-	string svgOpenTag = "";
+	string svgOpenTag = EMPTY_STRING;
 
 	svgOpenTag.append(SVG_OPENNER);
 	svgOpenTag += SPACE;
@@ -102,7 +102,7 @@ string SVGCreator::constructSVGOpenTag() const {
 //*************************************************************************************************************
 
 string SVGCreator::constructVariable(const string& variableName, const string& value) const {
-	string variable = "";
+	string variable = EMPTY_STRING;
 	variable.append(variableName);
 	variable += EQUAL;
 	variable += QUOTE;
@@ -116,7 +116,7 @@ string SVGCreator::constructVariable(const string& variableName, const string& v
 //*************************************************************************************************************
 
 string SVGCreator::constructStyleStr(const Strings& styleNames, const Strings& styleValues) const {
-	string style = "";
+	string style = EMPTY_STRING;
 
 	const size_t stylesCount = styleNames.size();
 
@@ -134,14 +134,16 @@ string SVGCreator::constructStyleStr(const Strings& styleNames, const Strings& s
 //*************************************************************************************************************
 
 string SVGCreator::constructTag(const string& tag, const string& value, int closeTag) const {
-	string tagStr = "";
+	string tagStr = EMPTY_STRING;
 
 	tagStr += TAG_OPEN;
 	tagStr.append(tag);
-	tagStr += SPACE;
 
-	tagStr.append(value);
-	tagStr += SPACE;
+	if (EMPTY_STRING != value) {
+		tagStr += SPACE;
+		tagStr.append(value);
+		tagStr += SPACE;
+	}
 
 	if (closeTag) {
 		tagStr += TAG_BEGIN_CLOSE;
@@ -155,22 +157,49 @@ string SVGCreator::constructTag(const string& tag, const string& value, int clos
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-string SVGCreator::constructCloseTag(const string& tag) const {
-	string closeTag = "";
+string SVGCreator::constructGroup(const string& id, const string& style, const string& content) const {
+	string groupStr = EMPTY_STRING;
+	groupStr.append(constructVariable(ID, id));
 
-	closeTag += TAG_OPEN;
-	closeTag.append(tag);
-	closeTag += TAG_BEGIN_CLOSE;
-	closeTag += TAG_CLOSE;
+	if (EMPTY_STRING != style) {
+		groupStr += SPACE;
+		groupStr.append(style);
+		groupStr += SPACE;
+	}
 
-	return closeTag;
+	groupStr = constructTag(TAG_GROUP, groupStr, false);
+
+	groupStr += NEW_LINE;
+	groupStr.append(content);
+	groupStr += NEW_LINE;
+
+	groupStr.append(constructTag(TAG_GROUP, EMPTY_STRING, true));
+
+	return groupStr;
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+string SVGCreator::constructTurnId(int turnIdx, int simTurnIdx) const {
+	string turnId = EMPTY_STRING;
+
+	turnId.append(TURN);
+	turnId.append(to_string(simTurnIdx));
+
+	if (INVALID_ID != simTurnIdx) {
+		turnId += UNDERSCORE;
+		turnId.append(to_string(simTurnIdx));
+	}
+
+	return turnId;
 }
 
 //*************************************************************************************************************
 //*************************************************************************************************************
 
 string SVGCreator::constructSVGGraphicalObjects(const Objects* const objects) const {
-	string objectsStr = "";
+	string objectsStr = EMPTY_STRING;
 
 	const size_t objectsCount = objects->size();
 
@@ -191,14 +220,11 @@ string SVGCreator::constructSVGGraphicalObjects(const Objects* const objects) co
 //*************************************************************************************************************
 
 string SVGCreator::constructObjectStr(const Object* const object) const {
-	string objectStr = "";
+	string objectStr = EMPTY_STRING;
 
 	const ObjectType objectType = object->getType();
 
-	if (ObjectType::POINT == objectType) {
-		objectStr = constructPointStr(object);
-	}
-	else if (ObjectType::CIRCLE == objectType) {
+	if (ObjectType::POINT == objectType || ObjectType::CIRCLE == objectType) {
 		objectStr = constructCircleStr(object);
 	}
 
@@ -225,32 +251,8 @@ string SVGCreator::constructObjectStyleVar(const Object* const object) const {
 //*************************************************************************************************************
 //*************************************************************************************************************
 
-string SVGCreator::constructPointStr(const Object* const object) const {
-	string pointStr = "";
-
-	const Point* point = dynamic_cast<const Point*>(object);
-
-	pointStr.append(constructVariable(CIRCLE_X, to_string(point->getXCoord())));
-	pointStr += SPACE;
-
-	pointStr.append(constructVariable(CIRCLE_Y, to_string(point->getYCoord())));
-	pointStr += SPACE;
-
-	pointStr.append(constructVariable(CIRCLE_RADIUS, to_string(POINT_RADIUS)));
-	pointStr += SPACE;
-
-	pointStr.append(constructObjectStyleVar(object));
-
-	pointStr = constructTag(CIRCLE, pointStr, true);
-
-	return pointStr;
-}
-
-//*************************************************************************************************************
-//*************************************************************************************************************
-
 string SVGCreator::constructCircleStr(const Object* const object) const {
-	string circleStr = "";
+	string circleStr = EMPTY_STRING;
 
 	const Circle* circle = dynamic_cast<const Circle*>(object);
 
@@ -268,4 +270,60 @@ string SVGCreator::constructCircleStr(const Object* const object) const {
 	circleStr = constructTag(CIRCLE, circleStr, true);
 
 	return circleStr;
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+string SVGCreator::constructSVGTurns() const {
+	string turnsStr = EMPTY_STRING;
+	const Turns* const turns = gameData->getTurnsPtr();
+	const int turnsCount = static_cast<int>(turns->size());
+
+	for (int turnIdx = 0; turnIdx < turnsCount; ++turnIdx) {
+		string turnStr = constructSVGTurn(turnIdx, &turns->at(turnIdx));
+		string turnId = constructTurnId(turnIdx);
+		string turnStyle = constructStyleStr({ DISPLAY }, { NONE });
+
+		turnsStr.append(constructGroup(turnId, turnStyle, turnStr));
+
+		if (turnIdx < turnsCount - 1) {
+			turnsStr += NEW_LINE;
+			turnsStr += NEW_LINE;
+		}
+	}
+
+	return turnsStr;
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+string SVGCreator::constructSVGTurn(int turnIdx, const Turn* const turn) const {
+	string turnStr = EMPTY_STRING;
+
+	const SimulatedTurns* const simulatedTurns = turn->getSimulatedTurnsPtr(turnIdx);
+	const int simTurnsCount = static_cast<int>(simulatedTurns->size());
+
+	for (int simTurnIdx = 0; simTurnIdx < simTurnsCount; ++simTurnIdx) {
+		string simulatedTurnStr = constructSVGSimulatedTurn(&simulatedTurns->at(simTurnIdx));
+		string simTurnId = constructTurnId(turnIdx, simTurnIdx);
+		string simTurnStyle = constructStyleStr({ DISPLAY }, { NONE });
+
+		turnStr.append(constructGroup(simTurnId, simTurnStyle, simulatedTurnStr));
+
+		if (simTurnIdx < simTurnsCount - 1) {
+			turnStr += NEW_LINE;
+			turnStr += NEW_LINE;
+		}
+	}
+
+	return turnStr;
+}
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+string SVGCreator::constructSVGSimulatedTurn(const SimulatedTurn* const simTurn) const {
+	return constructSVGGraphicalObjects(simTurn->getObjectsPtr());
 }

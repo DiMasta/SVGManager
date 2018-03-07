@@ -10,11 +10,11 @@ public:
 
 	void initObjects(int objectsCount);
 
-	const Objects* const getObjectsPtr();
-
 	Object** getObjectPtr(int objectIdx);
 
-	const Object* const getObject(int objectIdx);
+	const Objects* const getObjectsPtr() const;
+
+	const Object* const getObject(int objectIdx) const;
 
 	int getObjectsCount() const;
 

@@ -49,3 +49,10 @@ void Turn::initSimulatedTurns(int simulatedTurnsCount) {
 SimulatedTurn* Turn::getSimulatedTurnPtr(int simulatedTurnIdx) {
 	return simulatedTurns.data() + simulatedTurnIdx;
 }
+
+//*************************************************************************************************************
+//*************************************************************************************************************
+
+const SimulatedTurns* const Turn::getSimulatedTurnsPtr(int simulatedTurnIdx) const {
+	return &simulatedTurns;
+}

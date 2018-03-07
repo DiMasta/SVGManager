@@ -1,7 +1,8 @@
 #include "point.h"
 
-Point::Point() : Object() {
-
+Point::Point() : Circle() {
+	setFill(true);
+	setContour(POINT_RADIUS);
 }
 
 //*************************************************************************************************************

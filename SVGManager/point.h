@@ -1,9 +1,9 @@
 #ifndef __POINT_H__
 #define __POINT_H__
 
-#include "object.h"
+#include "circle.h"
 
-class Point : public Object {
+class Point : public Circle {
 public:
 	Point();
 	~Point();

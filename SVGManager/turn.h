@@ -19,6 +19,8 @@ public:
 
 	SimulatedTurn* getSimulatedTurnPtr(int simulatedTurnIdx);
 
+	const SimulatedTurns* const getSimulatedTurnsPtr(int simulatedTurnIdx) const;
+
 private:
 	int id;
 	SimulatedTurns simulatedTurns;

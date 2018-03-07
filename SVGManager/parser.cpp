@@ -334,9 +334,9 @@ LineType Parser::getLineType(const string& line) const {
 
 string Parser::generateSimTurnFileName(int turnId, int simTurnIdx) const {
 	string fileName = SIMULATED_TURN_PREFIX;
-	fileName.append(UNDERSCORE);
+	fileName += UNDERSCORE;
 	fileName.append(to_string(turnId));
-	fileName.append(UNDERSCORE);
+	fileName += UNDERSCORE;
 	fileName.append(to_string(simTurnIdx));
 	fileName.append(TXT_FILE_POSTFIX);
 
