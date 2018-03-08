@@ -142,7 +142,6 @@ string SVGCreator::constructTag(const string& tag, const string& value, int clos
 	if (EMPTY_STRING != value) {
 		tagStr += SPACE;
 		tagStr.append(value);
-		tagStr += SPACE;
 	}
 
 	if (closeTag) {
@@ -163,8 +162,7 @@ string SVGCreator::constructGroup(const string& id, const string& style, const s
 
 	if (EMPTY_STRING != style) {
 		groupStr += SPACE;
-		groupStr.append(style);
-		groupStr += SPACE;
+		groupStr.append(constructVariable(STYLE, style));
 	}
 
 	groupStr = constructTag(TAG_GROUP, groupStr, false);
@@ -185,7 +183,7 @@ string SVGCreator::constructTurnId(int turnIdx, int simTurnIdx) const {
 	string turnId = EMPTY_STRING;
 
 	turnId.append(TURN);
-	turnId.append(to_string(simTurnIdx));
+	turnId.append(to_string(turnIdx));
 
 	if (INVALID_ID != simTurnIdx) {
 		turnId += UNDERSCORE;

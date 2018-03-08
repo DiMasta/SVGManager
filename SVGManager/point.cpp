@@ -2,7 +2,8 @@
 
 Point::Point() : Circle() {
 	setFill(true);
-	setContour(POINT_RADIUS);
+	setContour(POINT_CONTOUR);
+	setRadius(POINT_RADIUS);
 }
 
 //*************************************************************************************************************

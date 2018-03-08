@@ -3,6 +3,7 @@
 
 static const int INVALID_ID = -1;
 
+static const float POINT_CONTOUR = 1.f;
 static const float POINT_RADIUS = 5.f;
 
 static const char UNDERSCORE = '_';
