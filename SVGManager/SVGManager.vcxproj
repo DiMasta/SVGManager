@@ -135,7 +135,6 @@
     <ClInclude Include="game_data.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="parser_constants.h" />
-    <ClInclude Include="svg_constants.h" />
     <ClInclude Include="svg_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

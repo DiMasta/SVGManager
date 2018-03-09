@@ -39,7 +39,9 @@ void SVGCreator::setGameData(GameData* gameData) {
 void SVGCreator::createGameSimulation() {
 	init();
 	printSVGStr(XML_HEADER_LINE);
+	printSVGStr(SCRIPT_LINE);
 	printSVGStr(constructSVGOpenTag());
+	printSVGStr(TEXT_LINE);
 
 	printSVGStr(constructSVGGraphicalObjects(gameData->getObjectsPtr()));
 

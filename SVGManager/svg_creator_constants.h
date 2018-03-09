@@ -8,6 +8,8 @@ static const std::string SVG_HTML_FILE_NAME = "visualDebugTool.html";
 
 // Starting lines
 static const std::string XML_HEADER_LINE = "<? xml version=\"1.0\" encoding=\"UTF-8\"?>";
+static const std::string SCRIPT_LINE = "<script type=\"text/javascript\" src=\"simulationScript.js\"></script>";
+static const std::string TEXT_LINE = "<text id=\"infoText\" x=\"5\" y=\"20\" style=\"font-family:sans-serif;font-size:20px;fill:red\">Turn=-1 SimTurn=-1</text>";
 static const std::string SVG_OPENNER = "xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"";
 
 // SVG variables
